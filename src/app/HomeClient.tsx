@@ -826,7 +826,7 @@ function HomeClient({ initialConfig }: {
 
       <div className='overflow-visible -mt-6 md:mt-0 pb-32 md:pb-safe-bottom'>
         {/* 欢迎横幅 - 现代化精简设计 */}
-        <div className='mb-6 relative overflow-hidden rounded-xl bg-linear-to-r from-blue-500/90 via-purple-500/90 to-pink-500/90 backdrop-blur-sm shadow-xl border border-white/20'>
+        <div className='mb-6 relative overflow-hidden rounded-xl bg-linear-to-r from-emerald-500/90 via-teal-500/90 to-sky-500/90 backdrop-blur-sm shadow-xl border border-white/20'>
           <div className='relative p-4 sm:p-5'>
             {/* 动态渐变背景 */}
             <div className='absolute inset-0 bg-linear-to-br from-white/5 via-transparent to-black/5'></div>
@@ -1117,7 +1117,7 @@ function HomeClient({ initialConfig }: {
                       onClick={() => setFavoriteFilter(key)}
                       className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                         favoriteFilter === key
-                          ? 'bg-linear-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
+                          ? 'bg-linear-to-r from-emerald-500 via-teal-500 to-sky-500 text-white shadow-lg scale-105'
                           : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                       }`}
                     >

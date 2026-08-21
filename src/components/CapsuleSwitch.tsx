@@ -70,11 +70,11 @@ const CapsuleSwitch: React.FC<CapsuleSwitchProps> = ({
       {/* 滑动的渐变背景指示器 */}
       {indicatorStyle.width > 0 && (
         <div
-          className='absolute top-1 bottom-1 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 dark:from-blue-600 dark:via-purple-600 dark:to-pink-600 rounded-full shadow-xl transition-all duration-300 ease-out'
+          className='absolute top-1 bottom-1 bg-linear-to-r from-emerald-500 via-teal-500 to-sky-500 dark:from-emerald-600 dark:via-teal-600 dark:to-sky-600 rounded-full shadow-xl transition-all duration-300 ease-out'
           style={{
             left: `${indicatorStyle.left}px`,
             width: `${indicatorStyle.width}px`,
-            boxShadow: '0 0 20px rgba(147, 51, 234, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)',
+            boxShadow: '0 0 20px rgba(16, 185, 129, 0.5), 0 0 40px rgba(14, 165, 233, 0.3)',
           }}
         />
       )}

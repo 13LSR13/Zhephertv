@@ -3,11 +3,10 @@ import { createHash } from 'crypto';
 import fs from 'fs';
 import path from 'path';
 
-// node:sqlite is only available in Node.js 22.5+; dynamic require avoids
-// a hard crash on runtimes that don't ship this built-in (e.g. EdgeOne Pages
-// with Node.js 20). The import is deferred to the constructor so the module
-// can be loaded safely and will only throw when SqliteStorage is actually
-// instantiated on an unsupported runtime.
+// node:sqlite is only available in Node.js 22.5+; process.getBuiltinModule
+// defers its runtime loading so bundlers do not resolve this built-in during
+// compilation. SqliteStorage throws only when it is instantiated on an
+// unsupported runtime.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DatabaseSync = any;
 
@@ -33,8 +32,13 @@ export class SqliteStorage implements IStorage {
   private cleanupTimer: ReturnType<typeof setInterval> | null = null;
 
   constructor() {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { DatabaseSync } = require('node:sqlite') as { DatabaseSync: new (path: string) => DatabaseSync };
+    const sqlite = process.getBuiltinModule?.('node:sqlite');
+    if (!sqlite) {
+      throw new Error('[SQLite] node:sqlite requires Node.js 22.5+');
+    }
+    const { DatabaseSync } = sqlite as {
+      DatabaseSync: new (path: string) => DatabaseSync;
+    };
 
     const isBuild = process.env.IS_BUILD_PHASE === 'true';
 
