@@ -6,7 +6,7 @@ on:
       project_name:
         description: 'EdgeOne Pages 项目名'
         required: false
-        default: 'lunatv'
+        default: 'zhephertv'
         type: string
       area:
         description: '部署区域：overseas = 全球可用区（不含中国大陆），global = 全球可用区'
@@ -56,6 +56,8 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
           NEXT_PUBLIC_STORAGE_TYPE: ${{ secrets.NEXT_PUBLIC_STORAGE_TYPE }}
+          NEXT_PUBLIC_USER_DATA_STORAGE: ${{ secrets.NEXT_PUBLIC_USER_DATA_STORAGE }}
+          DISABLE_STATS: ${{ secrets.DISABLE_STATS }}
           UPSTASH_URL: ${{ secrets.UPSTASH_URL }}
           UPSTASH_TOKEN: ${{ secrets.UPSTASH_TOKEN }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
@@ -97,6 +99,7 @@ jobs:
 
           keys=(
             USERNAME PASSWORD NEXT_PUBLIC_STORAGE_TYPE
+            NEXT_PUBLIC_USER_DATA_STORAGE DISABLE_STATS
             UPSTASH_URL UPSTASH_TOKEN TMDB_API_KEY
             NEXT_PUBLIC_SITE_NAME ANNOUNCEMENT ENABLE_REGISTER
             SITE_BASE REDIS_URL KVROCKS_URL
@@ -151,6 +154,7 @@ jobs:
         run: |
           keys=(
             USERNAME PASSWORD NEXT_PUBLIC_STORAGE_TYPE
+            NEXT_PUBLIC_USER_DATA_STORAGE DISABLE_STATS
             UPSTASH_URL UPSTASH_TOKEN TMDB_API_KEY
             NEXT_PUBLIC_SITE_NAME ANNOUNCEMENT ENABLE_REGISTER
             SITE_BASE REDIS_URL KVROCKS_URL

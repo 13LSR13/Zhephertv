@@ -41,7 +41,7 @@ export async function GetBangumiCalendarData(): Promise<BangumiCalendarData[]> {
 
     const response = await fetch(apiUrl, {
       headers: {
-        'User-Agent': 'LunaTV/1.0 (https://github.com/yourusername/LunaTV)',
+        'User-Agent': 'ZephyrTV/1.0 (https://github.com/13LSR/Zhephertv)',
         'Accept': 'application/json',
       },
       next: {

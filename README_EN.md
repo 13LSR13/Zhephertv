@@ -7,13 +7,13 @@
 
 ---
 
-# LunaTV Enhanced Edition
+# ZephyrTV
 
 <div align="center">
-  <img src="public/logo.png" alt="LunaTV Logo" width="120">
+  <img src="public/logo.png" alt="ZephyrTV Logo" width="120">
 </div>
 
-> 🎬 **LunaTV Enhanced Edition** is a comprehensive video streaming platform based on MoonTV with extensive enhancements. Features include **YouTube Integration**, **Cloud Drive Search**, **AI Recommendations**, **Short Drama**, **IPTV Live TV**, **Bangumi Anime**, **Watch Statistics**, **Danmaku System**, and 60+ major feature additions for the ultimate viewing experience.
+> 🎬 **ZephyrTV** continues from LunaTV Enhanced Edition while preserving its modern **YouTube Integration**, **Cloud Drive Search**, **AI Recommendations**, **Short Drama**, **IPTV Live TV**, **Bangumi Anime**, **Watch Statistics**, and **Danmaku System**.
 
 <div align="center">
 
@@ -23,7 +23,7 @@
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.18-38bdf8?logo=tailwindcss)
 ![ArtPlayer](https://img.shields.io/badge/ArtPlayer-5.4.0-ff6b6b)
 ![HLS.js](https://img.shields.io/badge/HLS.js-1.6.16-ec407a)
-![License](https://img.shields.io/badge/License-MIT-green)
+![License](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-green)
 ![Docker Ready](https://img.shields.io/badge/Docker-ready-blue?logo=docker)
 ![Version](https://img.shields.io/badge/Version-6.6.3-orange)
 
@@ -33,7 +33,7 @@
 
 ## 📢 About
 
-This project is a deep fork of **MoonTV**, starting from **v4.3.1** and continuously iterated to the current **v6.6.3**, with 60+ major feature modules and 400+ detail optimizations. See [CHANGELOG](CHANGELOG) for all new features.
+This migration uses **LunaTV Enhanced Edition v6.6.3** as its baseline and continues ZephyrTV's branding, deployment, and low-backend-command operating modes. See [CHANGELOG](CHANGELOG) for upstream feature and fix history.
 
 ## ⚠️ Disclaimer
 
@@ -106,8 +106,8 @@ This project is for educational purposes only. Do not use for commercial purpose
 
 ```bash
 # Clone the project
-git clone https://github.com/SzeMeng76/LunaTV.git
-cd LunaTV
+git clone https://github.com/13LSR/Zhephertv.git
+cd Zhephertv
 
 # Copy environment variables
 cp .env.example .env
@@ -198,9 +198,9 @@ This project is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/lic
 - ❌ You may not use this project for commercial purposes
 - ⚠️ If you remix, transform, or build upon the material, you must distribute your contributions under the same license
 
-© 2025-2026 LunaTV Enhanced Edition & Contributors
+© 2025-2026 ZephyrTV & Contributors
 
-Based on [MoonTV](https://github.com/MoonTechLab/LunaTV).
+Continued from [LunaTV Enhanced Edition](https://github.com/SzeMeng76/LunaTV), with attribution retained for MoonTV and all upstream contributors.
 
 ## 🙏 Acknowledgments
 
@@ -244,11 +244,11 @@ Thanks to these projects and their authors for their open-source contributions!
 
 ## 📊 Star History
 
-<a href="https://www.star-history.com/?repos=SzeMeng76%2FLunaTV&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=13LSR%2FZhephertv&type=date&legend=top-left">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=SzeMeng76/LunaTV&type=date&theme=dark&legend=top-left&sealed_token=iij9XuMQwh5rb8SNAKGkKG5rQoIEeYszjWID7ySfhAdCizmcs0StkAebYFZMZOzsSKDK1sYEu3OfbTZO9KQmhzwxg11xBpI8j_clH-lZWfr14521J0-L7Q" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=SzeMeng76/LunaTV&type=date&legend=top-left&sealed_token=iij9XuMQwh5rb8SNAKGkKG5rQoIEeYszjWID7ySfhAdCizmcs0StkAebYFZMZOzsSKDK1sYEu3OfbTZO9KQmhzwxg11xBpI8j_clH-lZWfr14521J0-L7Q" />
-    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=SzeMeng76/LunaTV&type=date&legend=top-left&sealed_token=iij9XuMQwh5rb8SNAKGkKG5rQoIEeYszjWID7ySfhAdCizmcs0StkAebYFZMZOzsSKDK1sYEu3OfbTZO9KQmhzwxg11xBpI8j_clH-lZWfr14521J0-L7Q" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=13LSR/Zhephertv&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=13LSR/Zhephertv&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=13LSR/Zhephertv&type=Date" />
   </picture>
 </a>
 
@@ -258,6 +258,6 @@ Thanks to these projects and their authors for their open-source contributions!
 
 **If this project helps you, please give it a ⭐ Star!**
 
-Made with ❤️ by LunaTV Enhanced Edition Team
+Made with ❤️ by ZephyrTV Contributors
 
 </div>

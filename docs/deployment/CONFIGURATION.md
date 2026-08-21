@@ -61,6 +61,7 @@
 | `USERNAME`               | 站长账号       | `admin`               |
 | `PASSWORD`               | 站长密码       | `your_secure_password`|
 | `NEXT_PUBLIC_STORAGE_TYPE` | 存储类型     | `kvrocks` / `redis` / `upstash` |
+| `NEXT_PUBLIC_USER_DATA_STORAGE` | 个人数据存储模式 | `remote` / `local` |
 
 ### 存储配置
 
@@ -84,7 +85,8 @@
 | 变量                                | 说明                 | 默认值      | 可选值                    |
 | ----------------------------------- | -------------------- | ----------- | ------------------------- |
 | `SITE_BASE`                         | 站点 URL             | 空          | `https://example.com`     |
-| `NEXT_PUBLIC_SITE_NAME`             | 站点名称             | `MoonTV`    | 任意字符串                |
+| `NEXT_PUBLIC_SITE_NAME`             | 站点名称             | `ZephyrTV`  | 任意字符串                |
+| `DISABLE_STATS`                     | 禁用服务端播放和登录统计 | `false`  | `true` / `false`          |
 | `ANNOUNCEMENT`                      | 站点公告             | 默认公告     | 任意字符串                |
 | `NEXT_PUBLIC_SEARCH_MAX_PAGE`       | 搜索最大页数         | `5`         | `1-50`                    |
 | `NEXT_PUBLIC_DOUBAN_PROXY_TYPE`     | 豆瓣数据代理类型     | `direct`    | `direct` / `cors-proxy-zwei` / `cmliussss-cdn-tencent` / `cmliussss-cdn-ali` / `custom` |
@@ -97,6 +99,11 @@
 | `DISABLE_SSRF_PROTECTION`           | 禁用 SSRF 防护       | `false`     | `true` / `false`          |
 
 > 💡 **DISABLE_HERO_TRAILER**：首页 HeroBanner 预告片会消耗较多流量，且预告片 URL 带时间戳会定时过期。
+
+> 💡 **NEXT_PUBLIC_USER_DATA_STORAGE**：设置为 `local` 时，账号与站点配置仍使用 `NEXT_PUBLIC_STORAGE_TYPE` 指定的后端，但播放记录、收藏、提醒、搜索历史、跳过配置和派生用户统计只保存在当前浏览器。此模式不支持跨设备同步，并自动停用服务端统计。
+
+> 💡 **DISABLE_STATS**：设置为 `true` 时，服务端不再读取或写入播放统计与登录统计，可减少 Redis、Upstash 或 Kvrocks 命令量。
+>
 > - **Vercel**：自动禁用（无需设置）
 > - **Docker/VPS（可挂载持久化卷）**：无需禁用，视频会缓存到本地（`VIDEO_CACHE_DIR`），URL 过期后自动刷新并重新缓存
 > - **ClawCloud、HF Space、EdgeOne Pages 等无持久化平台**：建议设置 `DISABLE_HERO_TRAILER=true`，因为无法缓存视频，URL 过期后每次刷新都要重新下载

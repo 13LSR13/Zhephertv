@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAuthInfoFromCookie } from '@/lib/auth';
 import { getConfig } from '@/lib/config';
 import { db } from '@/lib/db';
+import { isUserDataLocal } from '@/lib/feature-flags';
 
 export const runtime = 'nodejs';
 
@@ -16,6 +17,10 @@ const HISTORY_LIMIT = 20;
  * 返回 string[]
  */
 export async function GET(request: NextRequest) {
+  if (isUserDataLocal()) {
+    return NextResponse.json([]);
+  }
+
   try {
     // 从 cookie 获取用户信息
     const authInfo = getAuthInfoFromCookie(request);
@@ -53,6 +58,10 @@ export async function GET(request: NextRequest) {
  * body: { keyword: string }
  */
 export async function POST(request: NextRequest) {
+  if (isUserDataLocal()) {
+    return NextResponse.json({ success: true, storage: 'local' });
+  }
+
   try {
     // 从 cookie 获取用户信息
     const authInfo = getAuthInfoFromCookie(request);
@@ -105,6 +114,10 @@ export async function POST(request: NextRequest) {
  * 2. 带 keyword=<kw> -> 删除单条关键字
  */
 export async function DELETE(request: NextRequest) {
+  if (isUserDataLocal()) {
+    return NextResponse.json({ success: true, storage: 'local' });
+  }
+
   try {
     // 从 cookie 获取用户信息
     const authInfo = getAuthInfoFromCookie(request);

@@ -16,11 +16,12 @@
  */
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { usePlayRecordsArrayQuery } from './usePlayRecordsQuery';
-import { useSourceMapQuery } from './useSourcesQuery';
-import { useRemindersQuery } from './useRemindersQuery';
 import type { PlayRecord } from '@/lib/types';
-import type { Reminder } from '@/lib/db.client';
+import {
+  getAllPlayRecords,
+  getAllReminders,
+  type Reminder,
+} from '@/lib/db.client';
 
 // ============================================================================
 // Constants
@@ -79,15 +80,12 @@ async function getOriginalEpisodes(record: PlayRecord & { key: string }, videoId
   // 始终从数据库重新读取最新的 original_episodes
   try {
     console.log(`🔍 从数据库读取最新的原始集数: ${record.title}`);
-    const freshRecordsResponse = await fetch('/api/playrecords');
-    if (freshRecordsResponse.ok) {
-      const freshRecords = await freshRecordsResponse.json();
-      const freshRecord = freshRecords[recordKey];
+    const freshRecords = await getAllPlayRecords(true);
+    const freshRecord = freshRecords[recordKey];
 
-      if (freshRecord?.original_episodes && freshRecord.original_episodes > 0) {
-        console.log(`📚 从数据库读取到最新原始集数: ${record.title} = ${freshRecord.original_episodes}集 (当前播放记录: ${record.total_episodes}集)`);
-        return freshRecord.original_episodes;
-      }
+    if (freshRecord?.original_episodes && freshRecord.original_episodes > 0) {
+      console.log(`📚 从存储读取到最新原始集数: ${record.title} = ${freshRecord.original_episodes}集 (当前播放记录: ${record.total_episodes}集)`);
+      return freshRecord.original_episodes;
     }
   } catch (error) {
     console.warn(`⚠️ 从数据库读取原始集数失败: ${record.title}，使用内存值`, error);
@@ -277,9 +275,7 @@ export function useWatchingUpdatesQuery(options?: {
       const playRecordsArray = await queryClient.ensureQueryData({
         queryKey: ['playRecords', 'array'],
         queryFn: async () => {
-          const response = await fetch('/api/playrecords');
-          if (!response.ok) throw new Error('Failed to fetch play records');
-          const data = await response.json() as Record<string, PlayRecord>;
+          const data = await getAllPlayRecords();
           return Object.entries(data)
             .map(([key, record]) => ({ ...record, key }))
             .sort((a, b) => (b.save_time || 0) - (a.save_time || 0));
@@ -304,11 +300,7 @@ export function useWatchingUpdatesQuery(options?: {
 
       const reminders = await queryClient.ensureQueryData({
         queryKey: ['reminders'],
-        queryFn: async () => {
-          const response = await fetch('/api/reminders');
-          if (!response.ok) throw new Error('Failed to fetch reminders');
-          return await response.json() as Record<string, Reminder>;
-        },
+        queryFn: (): Promise<Record<string, Reminder>> => getAllReminders(),
       });
 
       let updatedCount = 0;

@@ -27,6 +27,7 @@ export async function GET(request: NextRequest) {
   const result: any = {
     SiteName: config.SiteConfig.SiteName,
     StorageType: process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage',
+    UserDataStorage: process.env.NEXT_PUBLIC_USER_DATA_STORAGE || 'remote',
     Version: CURRENT_VERSION,
     DownloadEnabled: config.DownloadConfig?.enabled ?? true,
     requireInviteCode: config.UserConfig?.RequireInviteCode ?? false,

@@ -7,13 +7,13 @@
 
 ---
 
-# LunaTV Enhanced Edition
+# ZephyrTV
 
 <div align="center">
-  <img src="public/logo.png" alt="LunaTV Logo" width="120">
+  <img src="public/logo.png" alt="ZephyrTV Logo" width="120">
 </div>
 
-> 🎬 **LunaTV Enhanced Edition** 是基于 MoonTV 深度二次开发的全功能影视聚合播放平台。在原版基础上新增了 **YouTube 集成**、**网盘搜索**、**AI 推荐**、**短剧功能**、**IPTV 直播**、**Bangumi 动漫**、**播放统计**、**弹幕系统**等 60+ 重大功能增强，打造极致的在线观影体验。
+> 🎬 **ZephyrTV** 是基于 LunaTV Enhanced Edition 持续演进的影视聚合播放平台，保留新版的 **YouTube 集成**、**网盘搜索**、**AI 推荐**、**短剧功能**、**IPTV 直播**、**Bangumi 动漫**、**播放统计**与**弹幕系统**。
 
 <div align="center">
 
@@ -23,7 +23,7 @@
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.18-38bdf8?logo=tailwindcss)
 ![ArtPlayer](https://img.shields.io/badge/ArtPlayer-5.4.0-ff6b6b)
 ![HLS.js](https://img.shields.io/badge/HLS.js-1.6.16-ec407a)
-![License](https://img.shields.io/badge/License-MIT-green)
+![License](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-green)
 ![Docker Ready](https://img.shields.io/badge/Docker-ready-blue?logo=docker)
 ![Version](https://img.shields.io/badge/Version-6.6.3-orange)
 
@@ -33,7 +33,7 @@
 
 ## 📢 项目说明
 
-本项目是在 **MoonTV** 基础上进行的深度二次开发版本，从 **v4.3.1** 版本开始，持续迭代至当前 **v6.6.3**，累计新增 60+ 重大功能模块，400+ 细节优化。所有新增功能详见 [CHANGELOG](CHANGELOG)。
+本项目以 **LunaTV Enhanced Edition v6.6.3** 为迁移基线，继续维护 ZephyrTV 的品牌、部署方式和低后端命令量运行模式。上游功能与修复记录详见 [CHANGELOG](CHANGELOG)。
 
 ## ⚠️ 重要声明
 
@@ -106,8 +106,8 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/SzeMeng76/LunaTV.git
-cd LunaTV
+git clone https://github.com/13LSR/Zhephertv.git
+cd Zhephertv
 
 # 复制环境变量配置
 cp .env.example .env
@@ -198,9 +198,9 @@ pnpm dev
 - ❌ 您不得将本项目用于商业目的
 - ⚠️ 若您修改、转换或以本项目为基础进行创作，您必须以相同的许可协议分发您的作品
 
-© 2025-2026 LunaTV Enhanced Edition & Contributors
+© 2025-2026 ZephyrTV & Contributors
 
-基于 [MoonTV](https://github.com/MoonTechLab/LunaTV) 进行二次开发。
+基于 [LunaTV Enhanced Edition](https://github.com/SzeMeng76/LunaTV) 继续开发，并保留对 MoonTV 与所有上游贡献者的致谢。
 
 ## 🙏 致谢
 
@@ -244,11 +244,11 @@ pnpm dev
 
 ## 📊 Star History
 
-<a href="https://www.star-history.com/?repos=SzeMeng76%2FLunaTV&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=13LSR%2FZhephertv&type=date&legend=top-left">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=SzeMeng76/LunaTV&type=date&theme=dark&legend=top-left&sealed_token=iij9XuMQwh5rb8SNAKGkKG5rQoIEeYszjWID7ySfhAdCizmcs0StkAebYFZMZOzsSKDK1sYEu3OfbTZO9KQmhzwxg11xBpI8j_clH-lZWfr14521J0-L7Q" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=SzeMeng76/LunaTV&type=date&legend=top-left&sealed_token=iij9XuMQwh5rb8SNAKGkKG5rQoIEeYszjWID7ySfhAdCizmcs0StkAebYFZMZOzsSKDK1sYEu3OfbTZO9KQmhzwxg11xBpI8j_clH-lZWfr14521J0-L7Q" />
-    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=SzeMeng76/LunaTV&type=date&legend=top-left&sealed_token=iij9XuMQwh5rb8SNAKGkKG5rQoIEeYszjWID7ySfhAdCizmcs0StkAebYFZMZOzsSKDK1sYEu3OfbTZO9KQmhzwxg11xBpI8j_clH-lZWfr14521J0-L7Q" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=13LSR/Zhephertv&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=13LSR/Zhephertv&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=13LSR/Zhephertv&type=Date" />
   </picture>
 </a>
 
@@ -258,6 +258,6 @@ pnpm dev
 
 **如果这个项目对你有帮助，请给个 ⭐ Star 支持一下！**
 
-Made with ❤️ by LunaTV Enhanced Edition Team
+Made with ❤️ by ZephyrTV Contributors
 
 </div>

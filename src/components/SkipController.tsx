@@ -1027,7 +1027,7 @@ export default function SkipController({
     const a = document.createElement('a');
     const date = new Date().toISOString().slice(0, 10);
     a.href = url;
-    a.download = `lunatv-skip-presets-${date}.json`;
+    a.download = `zephyrtv-skip-presets-${date}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

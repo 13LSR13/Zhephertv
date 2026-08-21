@@ -6,11 +6,11 @@
  * 功能：
  * - 统一管理收藏数据的获取
  * - 自动缓存、去重、后台同步
- * - 替代 db.client.ts 的 getAllFavorites() 直接 fetch
+ * - 通过 db.client.ts 自动适配远端或浏览器本地存储
  */
 
 import { useQuery, queryOptions } from '@tanstack/react-query';
-import type { Favorite } from '@/lib/types';
+import { getAllFavorites, type Favorite } from '@/lib/db.client';
 
 // ============================================================================
 // Query Options
@@ -21,16 +21,7 @@ import type { Favorite } from '@/lib/types';
  */
 export const favoritesQueryOptions = queryOptions({
   queryKey: ['favorites'] as const,
-  queryFn: async (): Promise<Record<string, Favorite>> => {
-    const response = await fetch('/api/favorites');
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch favorites: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data as Record<string, Favorite>;
-  },
+  queryFn: (): Promise<Record<string, Favorite>> => getAllFavorites(),
   staleTime: 5 * 60 * 1000, // 5分钟
   gcTime: 10 * 60 * 1000,   // 10分钟
   retry: 1,
@@ -87,13 +78,7 @@ export function useFavoritesArrayQuery(options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: ['favorites', 'array'] as const,
     queryFn: async () => {
-      const response = await fetch('/api/favorites');
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch favorites: ${response.status}`);
-      }
-
-      const data = await response.json() as Record<string, Favorite>;
+      const data = await getAllFavorites();
 
       // 转换为数组并排序
       const favoritesArray = Object.entries(data).map(([key, favorite]) => ({
@@ -139,13 +124,7 @@ export function useIsFavoritedQuery(
   return useQuery({
     queryKey: ['favorites', 'check', source, id] as const,
     queryFn: async () => {
-      const response = await fetch('/api/favorites');
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch favorites: ${response.status}`);
-      }
-
-      const data = await response.json() as Record<string, Favorite>;
+      const data = await getAllFavorites();
       const key = `${source}+${id}`;
 
       return !!data[key];

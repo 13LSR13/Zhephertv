@@ -71,7 +71,7 @@ async function testJarSource(source: any): Promise<{
     const userAgent =
       source.region === 'domestic'
         ? DEFAULT_USER_AGENT
-        : 'LunaTV-JarTest/1.0';
+        : 'ZephyrTV-JarTest/1.0';
 
     const response = await fetch(source.url, {
       method: 'HEAD',

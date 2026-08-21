@@ -6,11 +6,11 @@
  * 功能：
  * - 统一管理提醒数据的获取
  * - 自动缓存、去重、后台同步
- * - 替代 db.client.ts 的 getAllReminders() 直接 fetch
+ * - 通过 db.client.ts 自动适配远端或浏览器本地存储
  */
 
 import { useQuery, queryOptions } from '@tanstack/react-query';
-import type { Reminder } from '@/lib/db.client';
+import { getAllReminders, type Reminder } from '@/lib/db.client';
 
 // ============================================================================
 // Query Options
@@ -21,16 +21,7 @@ import type { Reminder } from '@/lib/db.client';
  */
 export const remindersQueryOptions = queryOptions({
   queryKey: ['reminders'] as const,
-  queryFn: async (): Promise<Record<string, Reminder>> => {
-    const response = await fetch('/api/reminders');
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch reminders: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data as Record<string, Reminder>;
-  },
+  queryFn: (): Promise<Record<string, Reminder>> => getAllReminders(),
   staleTime: 5 * 60 * 1000, // 5分钟
   gcTime: 10 * 60 * 1000,   // 10分钟
   retry: 1,
@@ -87,13 +78,7 @@ export function useRemindersArrayQuery(options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: ['reminders', 'array'] as const,
     queryFn: async () => {
-      const response = await fetch('/api/reminders');
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch reminders: ${response.status}`);
-      }
-
-      const data = await response.json() as Record<string, Reminder>;
+      const data = await getAllReminders();
 
       // 转换为数组并排序
       const remindersArray = Object.entries(data).map(([key, reminder]) => ({
@@ -143,13 +128,7 @@ export function useIsRemindedQuery(
   return useQuery({
     queryKey: ['reminders', 'check', source, id] as const,
     queryFn: async () => {
-      const response = await fetch('/api/reminders');
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch reminders: ${response.status}`);
-      }
-
-      const data = await response.json() as Record<string, Reminder>;
+      const data = await getAllReminders();
       const key = `${source}+${id}`;
 
       return !!data[key];

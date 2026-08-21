@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import { useQuery, useMutation, useQueryClient, queryOptions } from '@tanstack/react-query';
+import { getAllFavorites, getAllPlayRecords } from '@/lib/db.client';
 import { checkForUpdates, type UpdateStatus } from '@/lib/version_check';
 import type { PlayRecord } from '@/lib/types';
 
@@ -157,12 +158,7 @@ const playRecordsOptions = (
 ) => queryOptions({
   queryKey: ['playRecords', 'userMenu', enableFilter, minProgress, maxProgress],
   queryFn: async () => {
-    // 使用 fetch 直接获取，因为这里需要在 queryFn 内部调用
-    const response = await fetch('/api/playrecords');
-    if (!response.ok) {
-      throw new Error(`Failed to fetch play records: ${response.status}`);
-    }
-    const records = await response.json() as Record<string, PlayRecord>;
+    const records = await getAllPlayRecords();
 
     const recordsArray = Object.entries(records).map(([key, record]) => ({
       ...record,
@@ -219,17 +215,13 @@ interface UseFavoritesQueryOptions {
 const favoritesOptions = () => queryOptions({
   queryKey: ['favorites', 'userMenu'],
   queryFn: async () => {
-    const response = await fetch('/api/favorites');
-    if (response.ok) {
-      const favoritesData = await response.json() as Record<string, any>;
-      const favoritesArray = Object.entries(favoritesData).map(([key, favorite]) => ({
-        ...favorite,
-        key,
-      }));
-      // Sort by save time descending
-      return favoritesArray.sort((a, b) => b.save_time - a.save_time);
-    }
-    return [];
+    const favoritesData = await getAllFavorites();
+    const favoritesArray = Object.entries(favoritesData).map(([key, favorite]) => ({
+      ...favorite,
+      key,
+    }));
+    // Sort by save time descending
+    return favoritesArray.sort((a, b) => b.save_time - a.save_time);
   },
   staleTime: 2 * 60 * 1000, // 2 minutes
   gcTime: 10 * 60 * 1000,

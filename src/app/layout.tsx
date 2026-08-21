@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
 import nextDynamic from 'next/dynamic';
 import { cookies } from 'next/headers';
 import { Suspense } from 'react';
@@ -10,6 +9,7 @@ import { Toaster } from 'sonner';
 import './globals.css';
 
 import { getConfig } from '@/lib/config';
+import { DEFAULT_SITE_NAME } from '@/lib/brand';
 
 import { GlobalErrorIndicator } from '../components/GlobalErrorIndicator';
 import { GlobalDOMErrorHandler } from '../components/GlobalDOMErrorHandler';
@@ -38,7 +38,6 @@ const DownloadPanel = nextDynamic(() =>
 );
 const ChatFloatingWindow = nextDynamic(() => import('../components/watch-room/ChatFloatingWindow'));
 
-const inter = Inter({ subsets: ['latin'] });
 export const dynamic = 'force-dynamic';
 
 // 动态生成 metadata，支持配置更新后的标题变化
@@ -48,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const storageType = process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage';
   const config = await getConfig();
-  let siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'MoonTV';
+  let siteName = process.env.NEXT_PUBLIC_SITE_NAME || DEFAULT_SITE_NAME;
   if (storageType !== 'localstorage') {
     siteName = config.SiteConfig.SiteName;
   }
@@ -74,7 +73,7 @@ export default async function RootLayout({
 
   const storageType = process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage';
 
-  let siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'MoonTV';
+  let siteName = process.env.NEXT_PUBLIC_SITE_NAME || DEFAULT_SITE_NAME;
   let announcement =
     process.env.ANNOUNCEMENT ||
     '本网站仅提供影视信息搜索服务，所有内容均来自第三方网站。本站不存储任何视频资源，不对任何内容的准确性、合法性、完整性负责。';
@@ -132,6 +131,7 @@ export default async function RootLayout({
   // 将运行时配置注入到全局 window 对象，供客户端在运行时读取
   const runtimeConfig = {
     STORAGE_TYPE: process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage',
+    USER_DATA_STORAGE: process.env.NEXT_PUBLIC_USER_DATA_STORAGE || 'remote',
     DOUBAN_PROXY_TYPE: doubanProxyType,
     DOUBAN_PROXY: doubanProxy,
     DOUBAN_IMAGE_PROXY_TYPE: doubanImageProxyType,
@@ -175,7 +175,7 @@ export default async function RootLayout({
       </head>
       <body
         translate='no'
-        className={`${inter.className} min-h-screen bg-white text-gray-900 dark:bg-black dark:text-gray-200`}
+        className='font-primary min-h-screen bg-white text-gray-900 dark:bg-black dark:text-gray-200'
       >
         {/*
           iOS 沉浸式状态栏（black-translucent）下，状态栏图标固定为白色，

@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAuthInfoFromCookie } from '@/lib/auth';
 import { getConfig } from '@/lib/config';
 import { db } from '@/lib/db';
+import { isUserDataLocal } from '@/lib/feature-flags';
 import { recordRequest, getDbQueryCount, resetDbQueryCount } from '@/lib/performance-monitor';
 import { PlayRecord } from '@/lib/types';
 
@@ -14,6 +15,10 @@ export async function GET(request: NextRequest) {
   const startTime = Date.now();
   const startMemory = process.memoryUsage().heapUsed;
   resetDbQueryCount();
+
+  if (isUserDataLocal()) {
+    return NextResponse.json({});
+  }
 
   try {
     // 从 cookie 获取用户信息
@@ -139,6 +144,10 @@ export async function POST(request: NextRequest) {
   const startTime = Date.now();
   const startMemory = process.memoryUsage().heapUsed;
   resetDbQueryCount();
+
+  if (isUserDataLocal()) {
+    return NextResponse.json({ success: true, storage: 'local' });
+  }
 
   try {
     // 从 cookie 获取用户信息
@@ -343,6 +352,10 @@ export async function DELETE(request: NextRequest) {
   const startTime = Date.now();
   const startMemory = process.memoryUsage().heapUsed;
   resetDbQueryCount();
+
+  if (isUserDataLocal()) {
+    return NextResponse.json({ success: true, storage: 'local' });
+  }
 
   try {
     // 从 cookie 获取用户信息

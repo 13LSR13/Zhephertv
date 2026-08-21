@@ -496,7 +496,7 @@ async function refreshConfig() {
       const response = await fetch(config.ConfigSubscribtion.URL, {
         signal: controller.signal,
         headers: {
-          'User-Agent': 'LunaTV-ConfigFetcher/1.0'
+          'User-Agent': 'ZephyrTV-ConfigFetcher/1.0'
         }
       });
 

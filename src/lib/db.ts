@@ -1,6 +1,7 @@
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any, @typescript-eslint/no-non-null-assertion */
 
 import { AdminConfig } from './admin.types';
+import { isStatsDisabled, isUserDataLocal } from './feature-flags';
 import { KvrocksStorage } from './kvrocks.db';
 import { SqliteStorage } from './sqlite.db';
 import { RedisStorage } from './redis.db';
@@ -27,6 +28,8 @@ const STORAGE_TYPE =
     | 'sqlite'
     | undefined) || 'localstorage';
 
+const STATS_DISABLED = isStatsDisabled() || isUserDataLocal();
+
 // 创建存储实例
 function createStorage(): IStorage {
   switch (STORAGE_TYPE) {
@@ -39,7 +42,7 @@ function createStorage(): IStorage {
     case 'sqlite':
       if (process.env.EDGEONE_PAGES === '1') {
         throw new Error(
-          '[LunaTV] SQLite storage is not supported on EdgeOne Pages: the platform has no persistent filesystem. ' +
+          '[ZephyrTV] SQLite storage is not supported on EdgeOne Pages: the platform has no persistent filesystem. ' +
           'Please set NEXT_PUBLIC_STORAGE_TYPE to "upstash", "redis", or "kvrocks".'
         );
       }
@@ -516,6 +519,29 @@ export class DbManager {
 
   // ---------- 播放统计相关 ----------
   async getPlayStats(): Promise<PlayStatsResult> {
+    if (STATS_DISABLED) {
+      return {
+        totalUsers: 0,
+        totalWatchTime: 0,
+        totalPlays: 0,
+        avgWatchTimePerUser: 0,
+        avgPlaysPerUser: 0,
+        userStats: [],
+        topSources: [],
+        dailyStats: [],
+        registrationStats: {
+          todayNewUsers: 0,
+          totalRegisteredUsers: 0,
+          registrationTrend: [],
+        },
+        activeUsers: {
+          daily: 0,
+          weekly: 0,
+          monthly: 0,
+        },
+      };
+    }
+
     incrementDbQuery();
     if (typeof (this.storage as any).getPlayStats === 'function') {
       return (this.storage as any).getPlayStats();
@@ -547,6 +573,18 @@ export class DbManager {
   }
 
   async getUserPlayStat(userName: string): Promise<UserPlayStat> {
+    if (STATS_DISABLED) {
+      return {
+        username: userName,
+        totalWatchTime: 0,
+        totalPlays: 0,
+        lastPlayTime: 0,
+        recentRecords: [],
+        avgWatchTime: 0,
+        mostWatchedSource: '',
+      };
+    }
+
     incrementDbQuery();
     if (typeof (this.storage as any).getUserPlayStat === 'function') {
       return (this.storage as any).getUserPlayStat(userName);
@@ -565,6 +603,10 @@ export class DbManager {
   }
 
   async getContentStats(limit = 10): Promise<ContentStat[]> {
+    if (STATS_DISABLED) {
+      return [];
+    }
+
     incrementDbQuery();
     if (typeof (this.storage as any).getContentStats === 'function') {
       return (this.storage as any).getContentStats(limit);
@@ -580,6 +622,10 @@ export class DbManager {
     _id: string,
     _watchTime: number
   ): Promise<void> {
+    if (STATS_DISABLED) {
+      return;
+    }
+
     incrementDbQuery();
     if (typeof (this.storage as any).updatePlayStatistics === 'function') {
       await (this.storage as any).updatePlayStatistics(_userName, _source, _id, _watchTime);
@@ -592,6 +638,10 @@ export class DbManager {
     isFirstLogin?: boolean,
     loginMeta?: { ip?: string; location?: string; device?: string; browser?: string; os?: string }
   ): Promise<void> {
+    if (STATS_DISABLED) {
+      return;
+    }
+
     incrementDbQuery();
     if (typeof (this.storage as any).updateUserLoginStats === 'function') {
       await (this.storage as any).updateUserLoginStats(userName, loginTime, isFirstLogin, loginMeta);
@@ -608,6 +658,10 @@ export class DbManager {
 
   // 检查存储类型是否支持统计功能
   isStatsSupported(): boolean {
+    if (STATS_DISABLED) {
+      return false;
+    }
+
     const storageType = process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage';
     return storageType !== 'localstorage';
   }

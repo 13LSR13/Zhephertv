@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
             headers: {
               'Authorization': `Bearer ${key}`,
               'Content-Type': 'application/json',
-              'User-Agent': 'LunaTV/1.0'
+              'User-Agent': 'ZephyrTV/1.0'
             }
           });
 

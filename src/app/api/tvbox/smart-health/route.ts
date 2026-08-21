@@ -33,7 +33,7 @@ async function testUrlReachability(
       method: 'HEAD',
       signal: controller.signal,
       headers: {
-        'User-Agent': 'LunaTV-HealthCheck/1.0',
+        'User-Agent': 'ZephyrTV-HealthCheck/1.0',
         Accept: '*/*',
         'Cache-Control': 'no-cache',
       },

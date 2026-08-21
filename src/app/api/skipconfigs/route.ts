@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { getAuthInfoFromCookie } from '@/lib/auth';
 import { db } from '@/lib/db';
+import { isUserDataLocal } from '@/lib/feature-flags';
 import { recordRequest, getDbQueryCount, resetDbQueryCount } from '@/lib/performance-monitor';
 import { EpisodeSkipConfig } from '@/lib/types';
 
@@ -34,6 +35,16 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const requestSize = Buffer.byteLength(JSON.stringify(body), 'utf8');
     const { action, key, config, username, identityKey } = body;
+
+    if (isUserDataLocal()) {
+      if (action === 'get') {
+        return NextResponse.json({ config: null, storage: 'local' });
+      }
+      if (action === 'getAll') {
+        return NextResponse.json({ configs: {}, storage: 'local' });
+      }
+      return NextResponse.json({ success: true, storage: 'local' });
+    }
 
     // 验证请求参数
     if (!action) {

@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
 
     const fetchHeaders: Record<string, string> = {
       'Content-Type': 'application/json',
-      'User-Agent': 'LunaTV/1.0',
+      'User-Agent': 'ZephyrTV/1.0',
     };
     if (authHeader) fetchHeaders['Authorization'] = authHeader;
 

@@ -13,11 +13,10 @@ export type { PlayStatsResult } from '@/lib/types';
 export const runtime = 'nodejs';
 
 export async function GET(request: NextRequest) {
-  const storageType = process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage';
-  if (storageType === 'localstorage') {
+  if (!db.isStatsSupported()) {
     return NextResponse.json(
       {
-        error: '不支持本地存储进行播放统计查看',
+        error: '播放统计已禁用，或当前存储模式不支持播放统计',
       },
       { status: 400 }
     );

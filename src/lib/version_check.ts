@@ -3,6 +3,7 @@
 'use client';
 
 import { CURRENT_VERSION } from "@/lib/version";
+import { PROJECT_VERSION_URL } from '@/lib/brand';
 
 // 版本检查结果枚举
 export enum UpdateStatus {
@@ -12,9 +13,7 @@ export enum UpdateStatus {
 }
 
 // 远程版本检查URL配置
-const VERSION_CHECK_URLS = [
-  'https://raw.githubusercontent.com/SzeMeng76/LunaTV/refs/heads/main/VERSION.txt',
-];
+const VERSION_CHECK_URLS = [PROJECT_VERSION_URL];
 
 // ========== 缓存机制 ==========
 

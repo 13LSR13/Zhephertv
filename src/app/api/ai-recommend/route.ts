@@ -136,7 +136,7 @@ export async function POST(request: NextRequest) {
         {
           enableWebSearch: aiConfig.enableWebSearch || false,
           tavilyApiKeys: aiConfig.tavilyApiKeys,
-          siteName: adminConfig.SiteConfig?.SiteName || 'LunaTV',
+          siteName: adminConfig.SiteConfig?.SiteName || 'ZephyrTV',
         }
       );
       console.log('📊 意图分析完成:', {
@@ -205,8 +205,8 @@ export async function POST(request: NextRequest) {
       // 使用 orchestrator 生成的 prompt（包含video context和搜索结果）
       systemPrompt = orchestrationResult.systemPrompt;
 
-      // 添加 LunaTV 特有的功能说明
-      systemPrompt += `\n## LunaTV 特色功能
+      // 添加 ZephyrTV 特有的功能说明
+      systemPrompt += `\n## ZephyrTV 特色功能
 支持：${capabilities.join('、')}
 当前日期：${currentDate}
 
@@ -214,7 +214,7 @@ ${youtubeSearchStatus}
 `;
     } else {
       // 使用原有的 systemPrompt（兼容旧逻辑）
-      const siteName = adminConfig.SiteConfig?.SiteName || 'LunaTV';
+      const siteName = adminConfig.SiteConfig?.SiteName || 'ZephyrTV';
       systemPrompt = `你是${siteName}的智能推荐助手，支持：${capabilities.join('、')}。当前日期：${currentDate}
 
 ## 功能状态：
