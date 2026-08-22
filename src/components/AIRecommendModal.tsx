@@ -64,12 +64,12 @@ const MessageItem = memo(({
       <div
         className={`max-w-[80%] p-3 rounded-xl shadow-sm ${
           message.role === 'user'
-            ? 'bg-linear-to-br from-blue-600 to-blue-700 text-white shadow-blue-500/20'
+            ? 'bg-linear-to-br from-green-600 to-blue-700 text-white shadow-blue-500/20'
             : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-200/50 dark:border-gray-600/50 shadow-gray-200/50 dark:shadow-gray-900/50'
         } ${message.content === '思考中...' ? 'opacity-70 animate-pulse' : ''}`}
       >
         {message.role === 'assistant' ? (
-          <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-2 prose-p:leading-relaxed prose-pre:bg-gray-800 prose-pre:text-gray-100 dark:prose-pre:bg-gray-900 prose-code:text-purple-600 dark:prose-code:text-purple-400 prose-code:bg-purple-50 dark:prose-code:bg-purple-900/20 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-strong:text-gray-900 dark:prose-strong:text-white prose-ul:my-2 prose-ol:my-2 prose-li:my-1">
+          <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-2 prose-p:leading-relaxed prose-pre:bg-gray-800 prose-pre:text-gray-100 dark:prose-pre:bg-gray-900 prose-code:text-green-600 dark:prose-code:text-green-400 prose-code:bg-green-50 dark:prose-code:bg-green-900/20 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-a:text-green-600 dark:prose-a:text-green-400 prose-strong:text-gray-900 dark:prose-strong:text-white prose-ul:my-2 prose-ol:my-2 prose-li:my-1">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
@@ -90,7 +90,7 @@ const MessageItem = memo(({
                                 e.stopPropagation();
                                 handleTitleClick(title);
                               }}
-                              className="text-blue-600 dark:text-blue-400 font-medium cursor-pointer hover:underline"
+                              className="text-green-600 dark:text-green-400 font-medium cursor-pointer hover:underline"
                             >
                               {part}
                             </span>
@@ -128,7 +128,7 @@ const MessageItem = memo(({
                                 e.stopPropagation();
                                 handleTitleClick(title);
                               }}
-                              className="text-blue-600 dark:text-blue-400 font-medium cursor-pointer hover:underline"
+                              className="text-green-600 dark:text-green-400 font-medium cursor-pointer hover:underline"
                             >
                               {part}
                             </span>
@@ -175,7 +175,7 @@ const MessageItem = memo(({
         <div className="mt-3 space-y-2 max-w-[80%]">
           <div className="text-xs text-gray-500 dark:text-gray-400 mb-2 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="bg-linear-to-br from-blue-100 to-blue-50 dark:from-blue-900 dark:to-blue-950 text-blue-700 dark:text-blue-300 px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm ring-1 ring-blue-200/50 dark:ring-blue-800/50">
+              <span className="bg-linear-to-br from-green-100 to-blue-50 dark:from-green-900 dark:to-blue-950 text-green-700 dark:text-green-300 px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm ring-1 ring-green-200/50 dark:ring-green-800/50">
                 🎬 点击搜索
               </span>
               <span className="font-medium">推荐影片</span>
@@ -191,7 +191,7 @@ const MessageItem = memo(({
             <div
               key={idx}
               onClick={() => handleMovieSelect(movie)}
-              className="@container p-3 bg-white dark:bg-gray-700 border border-gray-200/50 dark:border-gray-600/50 rounded-xl cursor-pointer hover:shadow-lg hover:shadow-blue-500/10 hover:border-blue-400 dark:hover:border-blue-500 hover:scale-[1.02] transition-all duration-200 group active:scale-[0.98]"
+              className="@container p-3 bg-white dark:bg-gray-700 border border-gray-200/50 dark:border-gray-600/50 rounded-xl cursor-pointer hover:shadow-lg hover:shadow-blue-500/10 hover:border-green-400 dark:hover:border-green-500 hover:scale-[1.02] transition-all duration-200 group active:scale-[0.98]"
             >
               <div className="flex items-start gap-3">
                 {movie.poster && (
@@ -207,12 +207,12 @@ const MessageItem = memo(({
                     {movie.year && (
                       <span className="text-gray-500 dark:text-gray-400 font-normal">({movie.year})</span>
                     )}
-                    <span className="ml-auto opacity-0 group-hover:opacity-100 transition-all duration-200 text-blue-600 dark:text-blue-400 text-xs font-medium flex items-center gap-0.5">
+                    <span className="ml-auto opacity-0 group-hover:opacity-100 transition-all duration-200 text-green-600 dark:text-green-400 text-xs font-medium flex items-center gap-0.5">
                       🔍 <span>搜索</span>
                     </span>
                   </h4>
                   {movie.genre && (
-                    <p className="text-xs text-blue-600 dark:text-blue-400 mt-1 font-medium">{movie.genre}</p>
+                    <p className="text-xs text-green-600 dark:text-green-400 mt-1 font-medium">{movie.genre}</p>
                   )}
                   <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5 line-clamp-2 leading-relaxed">
                     {movie.description}
@@ -857,14 +857,14 @@ export default function AIRecommendModal({ isOpen, onClose, context, welcomeMess
       {/* 对话框内容容器 - 使用 @container 查询 */}
       <div className="@container relative w-full h-full bg-white dark:bg-gray-900 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         {/* 头部 - 使用 Tailwind 4.0 改进的渐变 */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200/50 dark:border-gray-700/50 bg-linear-to-br from-blue-600 via-purple-600 to-blue-700 shadow-lg">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200/50 dark:border-gray-700/50 bg-linear-to-br from-green-600 via-emerald-600 to-blue-700 shadow-lg">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-white/20 rounded-xl backdrop-blur-sm ring-1 ring-white/30 shadow-inner">
               <Brain className="h-6 w-6 text-white drop-shadow-md" />
             </div>
             <div>
               <h2 className="text-xl font-bold text-white drop-shadow-sm">AI 智能助手</h2>
-              <p className="text-blue-50/90 text-sm font-medium">影视推荐 · 视频解析 · YouTube搜索</p>
+              <p className="text-green-50/90 text-sm font-medium">影视推荐 · 视频解析 · YouTube搜索</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -892,7 +892,7 @@ export default function AIRecommendModal({ isOpen, onClose, context, welcomeMess
         >
           {messages.length <= 1 && messages.every(msg => msg.role === 'assistant') && (
             <div className="text-center py-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-blue-500 to-purple-600 rounded-full mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-green-500 to-blue-600 rounded-full mb-4">
                 <Sparkles className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
@@ -910,11 +910,11 @@ export default function AIRecommendModal({ isOpen, onClose, context, welcomeMess
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
                   <button
                     onClick={() => handlePresetClick({ title: '📖 剧情介绍', message: '这部影片讲了什么故事？请详细介绍一下剧情' })}
-                    className="p-4 text-center bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-lg hover:scale-105 transition-all group"
+                    className="p-4 text-center bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-green-500 dark:hover:border-green-400 hover:shadow-lg hover:scale-105 transition-all group"
                     disabled={isPending}
                   >
                     <div className="text-3xl mb-2">📖</div>
-                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                       剧情介绍
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -938,11 +938,11 @@ export default function AIRecommendModal({ isOpen, onClose, context, welcomeMess
 
                   <button
                     onClick={() => handlePresetClick({ title: '🎬 相似推荐', message: '有没有类似的影片推荐？请推荐5部相似的电影或电视剧' })}
-                    className="p-4 text-center bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-purple-500 dark:hover:border-purple-400 hover:shadow-lg hover:scale-105 transition-all group"
+                    className="p-4 text-center bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-green-500 dark:hover:border-green-400 hover:shadow-lg hover:scale-105 transition-all group"
                     disabled={isPending}
                   >
                     <div className="text-3xl mb-2">🎬</div>
-                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    <div className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                       相似推荐
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -957,10 +957,10 @@ export default function AIRecommendModal({ isOpen, onClose, context, welcomeMess
                     <button
                       key={index}
                       onClick={() => handlePresetClick(preset)}
-                      className="p-3 text-left bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-md transition-all group"
+                      className="p-3 text-left bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-green-500 dark:hover:border-green-400 hover:shadow-md transition-all group"
                       disabled={isPending}
                     >
-                      <div className="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      <div className="font-medium text-gray-900 dark:text-gray-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                         {preset.title}
                       </div>
                     </button>
@@ -990,9 +990,9 @@ export default function AIRecommendModal({ isOpen, onClose, context, welcomeMess
             <div className="flex justify-start animate-in fade-in slide-in-from-bottom-2 duration-300">
               <div className="bg-white dark:bg-gray-700 p-3 rounded-xl border border-gray-200/50 dark:border-gray-600/50 shadow-sm">
                 <div className="flex space-x-1.5">
-                  <div className="w-2 h-2 bg-linear-to-br from-blue-500 to-purple-500 rounded-full animate-bounce shadow-sm"></div>
-                  <div className="w-2 h-2 bg-linear-to-br from-blue-500 to-purple-500 rounded-full animate-bounce shadow-sm" style={{ animationDelay: '0.15s' }}></div>
-                  <div className="w-2 h-2 bg-linear-to-br from-blue-500 to-purple-500 rounded-full animate-bounce shadow-sm" style={{ animationDelay: '0.3s' }}></div>
+                  <div className="w-2 h-2 bg-linear-to-br from-green-500 to-blue-500 rounded-full animate-bounce shadow-sm"></div>
+                  <div className="w-2 h-2 bg-linear-to-br from-green-500 to-blue-500 rounded-full animate-bounce shadow-sm" style={{ animationDelay: '0.15s' }}></div>
+                  <div className="w-2 h-2 bg-linear-to-br from-green-500 to-blue-500 rounded-full animate-bounce shadow-sm" style={{ animationDelay: '0.3s' }}></div>
                 </div>
               </div>
             </div>
@@ -1041,7 +1041,7 @@ export default function AIRecommendModal({ isOpen, onClose, context, welcomeMess
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="输入影视推荐类型、YouTube搜索内容或直接粘贴YouTube链接..."
-                className="w-full p-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-gray-50 dark:focus:bg-gray-800 resize-none transition-all duration-200 shadow-sm"
+                className="w-full p-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-gray-50 dark:focus:bg-gray-800 resize-none transition-all duration-200 shadow-sm"
                 rows={2}
                 disabled={isPending}
               />
@@ -1049,7 +1049,7 @@ export default function AIRecommendModal({ isOpen, onClose, context, welcomeMess
             <button
               type="submit"
               disabled={!inputMessage.trim() || isPending}
-              className="px-6 py-3 bg-linear-to-br from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed text-white rounded-xl font-medium transition-all duration-200 flex items-center space-x-2 shadow-lg shadow-blue-500/30 disabled:shadow-none active:scale-95"
+              className="px-6 py-3 bg-linear-to-br from-green-600 to-blue-700 hover:from-green-700 hover:to-blue-800 disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed text-white rounded-xl font-medium transition-all duration-200 flex items-center space-x-2 shadow-lg shadow-blue-500/30 disabled:shadow-none active:scale-95"
             >
               <Send className="h-4 w-4" />
               <span>{isPending ? '发送中' : '发送'}</span>
