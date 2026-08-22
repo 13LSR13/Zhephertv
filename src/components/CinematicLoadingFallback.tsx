@@ -7,7 +7,7 @@ import { Film, Popcorn, Star, Sparkles } from 'lucide-react';
  * Cinematic Loading Fallback - Movie-themed loading experience
  *
  * Features:
- * - Bing daily wallpaper background (blurred)
+ * - ZephyrTV background image
  * - Film reel loading animation with progress percentage
  * - Rotating fun messages to keep users engaged
  * - Dark mode optimized for movie watching experience
@@ -28,25 +28,6 @@ const loadingMessages = [
 export function CinematicLoadingFallback() {
   const [messageIndex, setMessageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [bingWallpaper, setBingWallpaper] = useState<string>('');
-
-  // Fetch Bing wallpaper
-  useEffect(() => {
-    const fetchBingWallpaper = async () => {
-      try {
-        const response = await fetch('/api/bing-wallpaper');
-        const data = await response.json();
-        if (data.url) {
-          setBingWallpaper(data.url);
-        }
-      } catch (error) {
-        console.log('Failed to fetch Bing wallpaper:', error);
-      }
-    };
-
-    fetchBingWallpaper();
-  }, []);
-
   // Fade in after mount
   useEffect(() => {
     setIsVisible(true);
@@ -69,33 +50,10 @@ export function CinematicLoadingFallback() {
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      {/* Bing wallpaper background - fades in when loaded */}
-      {bingWallpaper && (
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
-          style={{ backgroundImage: `url(${bingWallpaper})` }}
-        />
-      )}
-
-      {/* Gradient overlay layers (like login page) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-blue-600/30 to-pink-500/40 dark:from-purple-900/50 dark:via-blue-900/40 dark:to-pink-900/50" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
-
-      {/* Subtle animated background stars */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full animate-twinkle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url("https://eo-vpic.byz.qzz.io")' }}
+      />
 
       {/* Main content */}
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-md w-full">
@@ -149,11 +107,6 @@ export function CinematicLoadingFallback() {
       </div>
 
       <style jsx>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.8; }
-        }
-
         @keyframes spin-gentle {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
@@ -175,10 +128,6 @@ export function CinematicLoadingFallback() {
           }
         }
 
-        .animate-twinkle {
-          animation: twinkle ease-in-out infinite;
-        }
-
         .animate-spin-gentle {
           animation: spin-gentle 6s linear infinite;
         }
@@ -192,7 +141,6 @@ export function CinematicLoadingFallback() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .animate-twinkle,
           .animate-spin-gentle,
           .animate-pulse-slow,
           .animate-pulse-dot {

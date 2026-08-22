@@ -233,10 +233,6 @@ function LoginPageClient() {
         style={{ backgroundImage: 'url("https://eo-vpic.byz.qzz.io")' }}
       />
 
-      {/* 渐变叠加层 */}
-      <div className='absolute inset-0 bg-gradient-to-br from-emerald-700/40 via-teal-700/30 to-sky-600/40 dark:from-emerald-950/50 dark:via-teal-900/40 dark:to-sky-950/50' />
-      <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30' />
-
       <div className='absolute top-3 right-3 sm:top-4 sm:right-4 z-20'>
         <ThemeToggle />
       </div>
