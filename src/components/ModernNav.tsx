@@ -269,7 +269,7 @@ export default function ModernNav({ showAIButton = false, onAIButtonClick }: Mod
               {showAIButton && onAIButtonClick && (
                 <button
                   onClick={onAIButtonClick}
-                  className='relative p-2 rounded-lg bg-linear-to-br from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 active:scale-95 transition-all duration-200 shadow-lg shadow-blue-500/30 group'
+                  className='relative p-2 rounded-lg bg-linear-to-br from-green-500 to-blue-600 text-white hover:from-green-600 hover:to-blue-700 active:scale-95 transition-all duration-200 shadow-lg shadow-blue-500/30 group'
                   aria-label='AI 推荐'
                 >
                   <Sparkles className='h-5 w-5 group-hover:scale-110 transition-transform duration-300' />

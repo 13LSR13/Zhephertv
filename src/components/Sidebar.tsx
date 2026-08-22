@@ -196,7 +196,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
         >
           {/* 装饰性背景光晕 */}
           <div className='absolute top-0 left-0 w-full h-32 bg-linear-to-b from-green-400/5 via-blue-400/5 to-transparent pointer-events-none'></div>
-          <div className='absolute bottom-0 left-0 w-full h-48 bg-linear-to-t from-purple-400/5 via-pink-400/5 to-transparent pointer-events-none'></div>
+          <div className='absolute bottom-0 left-0 w-full h-48 bg-linear-to-t from-emerald-400/5 via-teal-400/5 to-transparent pointer-events-none'></div>
 
           <div className='flex h-full flex-col relative z-10'>
             {/* 顶部 Logo 区域 */}
@@ -215,7 +215,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
                   }`}
               >
                 {/* 渐变边框效果 */}
-                <div className='absolute inset-0 rounded-full bg-linear-to-r from-green-400 via-blue-400 to-purple-400 opacity-0 group-hover/toggle:opacity-100 transition-opacity duration-300 animate-pulse'></div>
+                <div className='absolute inset-0 rounded-full bg-linear-to-r from-emerald-400 via-teal-400 to-sky-400 opacity-0 group-hover/toggle:opacity-100 transition-opacity duration-300 animate-pulse'></div>
                 <div className='absolute inset-[2px] rounded-full bg-white dark:bg-gray-900 group-hover/toggle:bg-gray-50 dark:group-hover/toggle:bg-gray-800 transition-colors duration-300'></div>
 
                 <Menu className='h-4 w-4 relative z-10 transition-transform duration-300 group-hover/toggle:rotate-180' />
