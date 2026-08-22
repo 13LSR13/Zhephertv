@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { CURRENT_VERSION } from '@/lib/version';
+
 /**
  * 根路径 API 端点
  * 提供服务器状态信息和成人内容过滤模式检测
@@ -26,7 +28,7 @@ export async function GET(request: NextRequest) {
 
   const response = NextResponse.json({
     status: 'ok',
-    version: process.env.NEXT_PUBLIC_APP_VERSION || '1.0.0',
+    version: CURRENT_VERSION,
     authenticated: true,
     adultFilterEnabled,
     message: adultFilterEnabled

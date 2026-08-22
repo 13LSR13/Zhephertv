@@ -11,6 +11,21 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    version: "1.0.6",
+    date: "2026-08-22",
+    added: [
+    "基于最新 LunaTV 基线完成 ZephyrTV 迁移，保留品牌、图标、部署配置和本地数据模式",
+    "新增 SQLite 本地预览支持，并完成搜索、收藏和继续观看行为对照"
+    ],
+    changed: [
+    "ZephyrTV 改用独立的 1.x 版本线，不再沿用 LunaTV 上游版本号",
+    "统一页面、API、版本检查和 Docker 镜像使用的应用版本"
+    ],
+    fixed: [
+    "修复登录页背景、绿蓝品牌渐变和 SQLite 在 Turbopack 构建中的兼容性"
+    ]
+  },
+  {
     version: "6.6.3",
     date: "2026-06-26",
     added: [

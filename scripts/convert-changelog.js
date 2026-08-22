@@ -164,6 +164,23 @@ function updateVersionTs(version) {
   }
 }
 
+function updatePackageVersion(version) {
+  const packageJsonPath = path.join(process.cwd(), 'package.json');
+  try {
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    packageJson.version = version;
+    fs.writeFileSync(
+      packageJsonPath,
+      `${JSON.stringify(packageJson, null, 2)}\n`,
+      'utf8'
+    );
+    console.log(`✅ 已更新 package.json: ${version}`);
+  } catch (error) {
+    console.error(`❌ 无法更新 package.json:`, error.message);
+    process.exit(1);
+  }
+}
+
 function main() {
   try {
     const changelogPath = path.join(process.cwd(), 'CHANGELOG');
@@ -195,21 +212,11 @@ function main() {
 
     fs.writeFileSync(outputPath, tsContent, 'utf-8');
 
-    // 读取 VERSION.txt 并同步到 version.ts
-    const versionTxtPath = path.join(process.cwd(), 'VERSION.txt');
-    const versionFromFile = fs.readFileSync(versionTxtPath, 'utf8').trim();
-    console.log(`📄 VERSION.txt 版本: ${versionFromFile}`);
-    updateVersionTs(versionFromFile);
-
-    // 检查是否在 GitHub Actions 环境中运行
-    const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
-
-    if (isGitHubActions) {
-      // 在 GitHub Actions 中，更新 VERSION.txt 为 CHANGELOG 最新版本
-      console.log('正在更新 VERSION.txt...');
-      updateVersionFile(latestVersion);
-      updateVersionTs(latestVersion);
-    }
+    // CHANGELOG 首个版本是 ZephyrTV 的单一版本来源。
+    console.log('正在同步版本文件...');
+    updateVersionFile(latestVersion);
+    updateVersionTs(latestVersion);
+    updatePackageVersion(latestVersion);
 
     console.log(`✅ 成功生成 ${outputPath}`);
     console.log(`📊 版本统计:`);

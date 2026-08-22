@@ -1,6 +1,6 @@
 {
   "name": "zephyrtv",
-  "version": "6.6.3",
+  "version": "1.0.6",
   "private": true,
   "scripts": {
     "dev": "pnpm gen:manifest && next dev -H 0.0.0.0",
@@ -15,6 +15,7 @@
     "format": "prettier -w .",
     "format:check": "prettier -c .",
     "gen:manifest": "node scripts/generate-manifest.js",
+    "version:sync": "node scripts/convert-changelog.js",
     "edgeone:build": "node scripts/edgeone-build.mjs",
     "postbuild": "echo 'Build completed - sitemap generation disabled'",
     "prepare": "husky install"
