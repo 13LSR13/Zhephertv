@@ -46,7 +46,7 @@ export function CinematicLoadingFallback() {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center relative overflow-hidden transition-opacity duration-500 bg-gradient-to-b from-gray-900 via-gray-800 to-black ${
+      className={`min-h-screen flex items-center justify-center relative overflow-hidden transition-opacity duration-500 bg-black ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >

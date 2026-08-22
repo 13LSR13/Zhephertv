@@ -226,7 +226,7 @@ function LoginPageClient() {
 
 
   return (
-    <div translate="no" className='fixed inset-0 z-50 flex items-center justify-center px-3 sm:px-4 py-8 sm:py-0 overflow-hidden bg-gradient-to-br from-emerald-100 via-teal-50 to-sky-100 dark:from-emerald-950 dark:via-teal-950 dark:to-sky-950'>
+    <div translate="no" className='fixed inset-0 z-50 flex items-center justify-center px-3 sm:px-4 py-8 sm:py-0 overflow-hidden bg-black'>
       {/* 固定背景图；加载失败时显示根容器的渐变 fallback */}
       <div
         className='absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 animate-ken-burns'
